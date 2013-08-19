@@ -416,15 +416,18 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
-  def merge_with(other_id)
-    other = Article.find_by_id(other_id)
-    self.body = self.body + "\n\n" + other.body
-    self.comments << other.comments
-    self.save
+  def merge_with(other_article_id)
+    other = Article.find_by_id(other_article_id)
 
-    other = Article.find_by_id(other_id)
-    other.destory
-    self
+    merged = Article.new(:title => self.title, :author => self.author,
+                            :body => self.body + "\n\n" + other.body,
+                            :user_id => self.user_id, :published => true, :allow_comments => true)
+
+    merged.comments << self.comments << other.comments
+    merged.save!
+
+    # other = Article.find_by_id(other_id)
+    # other.destory
   end
 
   protected

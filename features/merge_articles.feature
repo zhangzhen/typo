@@ -25,6 +25,6 @@ Scenario: A non-admin cannot merge two articles (sad path)
 
 Scenario: The merged articles should contain the text of both previous articles
   Given I have merged article "3" with "4"
-  And I am on the Edit page of article "3"
+  And I am on the Edit page of article "5"
   Then I should see "Content1"
   And I should see "Content2"
