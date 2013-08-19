@@ -419,7 +419,12 @@ class Article < Content
   def merge_with(other_id)
     other = Article.find_by_id(other_id)
     self.body = self.body + "\n\n" + other.body
+    self.comments << other.comments
     self.save
+
+    other = Article.find_by_id(other_id)
+    other.destory
+    self
   end
 
   protected
