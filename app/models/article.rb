@@ -426,8 +426,12 @@ class Article < Content
     merged.comments << self.comments << other.comments
     merged.save!
 
-    # other = Article.find_by_id(other_id)
-    # other.destory
+    current = Article.find_by_id(self.id)
+    other = Article.find_by_id(other_article_id)
+    current.destroy
+    other.destroy
+
+    merged
   end
 
   protected
