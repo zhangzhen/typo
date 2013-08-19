@@ -48,7 +48,7 @@ describe Admin::ContentController do
       response.should render_template('index')
       response.should be_success
     end
-    
+
     it 'should restrict to withdrawn articles' do
       article = Factory(:article, :state => 'withdrawn', :published_at => '2010-01-01')
       get :index, :search => {:state => 'withdrawn'}
@@ -56,7 +56,7 @@ describe Admin::ContentController do
       response.should render_template('index')
       response.should be_success
     end
-  
+
     it 'should restrict to withdrawn articles' do
       article = Factory(:article, :state => 'withdrawn', :published_at => '2010-01-01')
       get :index, :search => {:state => 'withdrawn'}
@@ -462,6 +462,23 @@ describe Admin::ContentController do
 
   end
 
+  # describe 'article merging' do
+  #   before :each do
+  #     @fake_article = mock('Article')
+  #     @fake_artilce.stub(:id).and_return(3)
+  #   end
+  #   it 'should load this article' do
+  #     Article.should_receive(:find).with('3').
+  #       and_return(@fake_article)
+  #     post :merge, :id => 3, :merge_with => 4
+  #   end
+  #   it 'should call the model method that performs merging' do
+  #     Article.stub(:find).and_return(@fake_article)
+  #     @fake_article.should_receive(:merge_with).with(4).
+  #       and_return(@fake_article)
+  #     post :merge, :id => 3, :merge_with => 4
+  #   end
+  # end
 
   describe 'with admin connection' do
 
@@ -671,4 +688,5 @@ describe Admin::ContentController do
 
     end
   end
+
 end
